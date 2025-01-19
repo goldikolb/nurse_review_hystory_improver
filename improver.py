@@ -1,6 +1,12 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from langchain_community.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain.chains import RetrievalQA
+from langchain_community.llms import OpenAI as LangchainOpenAI
 
 # Hier holt man sich den API Key aus der .env Datei. Hier stellt man die Verbindung zu OpenAI und seinen # KI-Modellen her
 load_dotenv('.env', override=True)
@@ -16,6 +22,9 @@ Das sind die Anforderungen an die Anamnese:
 1. Die Anamnese muss sprachlich professionell, aber auch für Laien, die nicht mit der pflegerischen und medizinischen Sprache vertraut sind, verständlich geschrieben sein.
 2. Alle Aussagen in der Anamnese müssen im Konjunktiv erfolgen, um die subjektive Natur der Aussagen der versicherten Person zu verdeutlichen. 
 3. Du musst der Anamnese eine klare Struktur geben. Die Reihenfolge ist wie folgt. Für die Überschriften verwende ich Platzhalter, die ich dir danach genauer beschreibe. Informationen zu den einzelnen Platzhaltern können überall im Text verteilt sein. Lese den Entwurf ganz genau durch, um die einzelnen Inhalte auch korrekt den Überschriften zuordnen zu können.
+4. Beschreibe nicht nur Aktivitäten oder Kriterien, bei den die Person eine Unterstützung benötigt, sonder auch jene, welche sie selbständig bewältigen kann.
+
+GANZ WICHTIG: Auch wenn bestimmte Handlungen schwerfallen oder sehr mühsam sind, so ist es nicht immer zwingend, dass die Person eine Unterstützung benötigt. Achte aber immer ganz darauf, dass du alle Informationen aus dem Entwurf, welche du zu einem Kriterium auch in die Anamnese aufgenommen hast.
 
 Struktur der Anamnese:
 
@@ -103,35 +112,91 @@ Interaktion mit Personen im direkten Kontakt
 Kontaktpflege zu Personen außerhalb des direkten Umfelds
 Lese den Entwurf genau durch und extrahiere alle eindeutigen Angaben, bei den du zu dem personellen Hilfebedarf zu den einzelnen Kriterien eine klare Aussage treffen kannst. Findest du zu einzelnen oder allen Kriterien keine Aussage zum personellen Hilfebedarf, dann erfinde keine Aussagen, sie müssen nicht erwähnt werden.
 
+Wenn Du fertig bist, durchdenke nochmal die Struktur der Anamnese und überlege, ob du wirklich alle Informationen, welche zu einem Kriterium aus dem Entwurf entnehmen kannst, auch wirklich ALLES in der erstellten Anamnese berücksichtigt hast.
 """
 
-# An dieser Stelle wird derzu  verbessernden Text aus einer Datei der KI zur Verfügung gestellt. Hier als # txt-Format, aber jedes andere Format und Schnitstelle ist möglich
-with open('input/grobe_anamnese.txt', 'r') as file:
-    document_text = file.read()
+# Neue Funktion zum Erstellen der Vektordatenbank
+def create_vector_db():
+    # PDF laden und in Chunks aufteilen
+    loader = PyPDFLoader("rag_data/pflege_richtlinien_adult.pdf")
+    documents = loader.load()
+    
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=500,
+        chunk_overlap=100,
+        length_function=len
+    )
+    chunks = text_splitter.split_documents(documents)
+    
+    # Embeddings erstellen und in FAISS speichern
+    embeddings = OpenAIEmbeddings()
+    vector_store = FAISS.from_documents(chunks, embeddings)
+    
+    # Lokale Speicherung der Vektordatenbank
+    vector_store.save_local("faiss_index")
+    return vector_store
 
-print("Originaltext:", document_text)
+# Funktion zum Laden der Vektordatenbank
+def load_vector_db():
+    embeddings = OpenAIEmbeddings()
+    vector_store = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
+    return vector_store
 
-response = client.chat.completions.create(
-    model="gpt-3.5-turbo",  # Hier kann man auch "gpt-4" oder andere Modelle verwenden, je nach Bedarf. 
-    messages=[
-        {"role": "system", "content": system_prompt},  # Systemprompt für die Textoptimierung
-        {"role": "user", "content": document_text}  # Der zu optimierende Text
-    ],
-    temperature=0.7,
-    max_tokens=1500
-)
+# Hauptprogramm anpassen
+if __name__ == "__main__":
+    load_dotenv('.env', override=True)
+    openai_api_key = os.getenv('OPENAI_API_KEY')
+    client = OpenAI(api_key=openai_api_key)
 
-# Die verbesserte Version des Dokuments wird hier ausgeben
-optimized_text = response.choices[0].message.content.strip()
-print("Optimierter Text:", optimized_text)
+    # Vektordatenbank erstellen oder laden
+    if not os.path.exists("faiss_index"):
+        vector_store = create_vector_db()
+    else:
+        vector_store = load_vector_db()
 
-# Ab hier wird der neue Text wieder als txt-File und wird in einem gewünschten, hier 'output'-Ordner, abgelegt und dann gespeichert
-output_file_path = os.path.join('output', 'optimized_document.txt')
+    # Text aus Datei laden
+    with open('input/maria_mustermann.txt', 'r') as file:
+        document_text = file.read()
 
-# Speichere den optimierten Text in der Datei
-with open(output_file_path, 'w') as output_file:
-    output_file.write(optimized_text)
+    # Relevante Informationen aus den Richtlinien abrufen
+    retriever = vector_store.as_retriever(
+        search_kwargs={"k": 3}
+    )
 
-print(f"Der optimierte Text wurde erfolgreich unter {output_file_path} gespeichert.")
+    # Neue invoke Methode statt get_relevant_documents
+    relevant_context = retriever.invoke(document_text)
+    context_text = "\n".join([doc.page_content for doc in relevant_context])
 
-# Das wars
+    # System Prompt mit Kontext erweitern
+    enhanced_system_prompt = f"""
+    Hier sind die relevanten Informationen aus den Pflegebegutachtungsrichtlinien:
+    
+    {context_text}
+    
+    {system_prompt}
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": enhanced_system_prompt},
+            {"role": "user", "content": document_text}
+        ],
+        temperature=0.2,
+        max_tokens=1000
+    )
+
+    # Die verbesserte Version des Dokuments wird hier ausgeben
+    optimized_text = response.choices[0].message.content.strip()
+    print("Optimierter Text:", optimized_text)
+
+    # Ab hier wird der neue Text wieder als txt-File und wird in einem gewünschten, hier 'output'-Ordner, abgelegt und dann gespeichert
+    output_file_path = os.path.join('output', 'optimized_document.txt')
+
+    # Speichere den optimierten Text in der Datei
+    with open(output_file_path, 'w') as output_file:
+        output_file.write(optimized_text)
+
+    print(f"Der optimierte Text wurde erfolgreich unter {output_file_path} gespeichert.")
+
+    # Das wars

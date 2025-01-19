@@ -1,19 +1,17 @@
-Die Versicherte, Muster Edeltraud, geboren am 26.06.1941, leidet unter starken Schmerzen aufgrund von Bandscheibenvorfällen und hat keine Schmerzmittel. Sie hat Schwierigkeiten beim Bücken und Gehen, ist bereits dreimal gestürzt, zuletzt letzte Woche aus dem Bett gefallen. Ihr Ehemann muss sie beim Einkaufen und Kochen unterstützen. Zudem bemerkt sie eine Zunahme ihrer Vergesslichkeit, weshalb sie vom Neurologen an den Hausarzt überwiesen wurde.
+**<Gesundheitsproblem>**  
+Frau Maria Mustermann, geboren am 23. Oktober 1943, berichtet von mehreren gesundheitlichen Problemen. Sie leidet unter Schmerzen in der rechten Hüfte, im linken Knie und in der Wirbelsäule. Diese Schmerzen beeinträchtigen ihre Mobilität und alltäglichen Aktivitäten. Des Weiteren hat sie eine diagnostizierte Herzinsuffizienz, die regelmäßig ärztlich kontrolliert wird, jedoch ohne spezifische Medikation. Frau Mustermann gibt an, dass ihr Gedächtnis nicht mehr so zuverlässig ist, was sich in Vergesslichkeit äußert, beispielsweise beim Suchen von Gegenständen oder beim Vergessen von Terminen.
 
-### Gesundheitsprobleme:
-Muster Edeltraud leidet unter Bandscheibenvorfällen, starken Schmerzen, Vergesslichkeit, Diabetes Typ 2 mit Polyneuropathie, Gelenkschmerzen am Fuß aufgrund eines Gichtanfalls und einem erhöhten Sturzrisiko.
+**<Modul 1 Mobilität>**  
+Frau Mustermann hat Schwierigkeiten beim Treppensteigen, das sie nur sehr langsam und mit Pausen bewältigen kann. Sie hält sich dabei am Geländer fest und fühlt sich sicherer, wenn jemand in der Nähe ist. Sie berichtet von mehreren Stürzen in der Wohnung, die meist durch Unachtsamkeit verursacht wurden. Das Aufstehen aus dem Bett und von der Toilette gelingt ihr zwar alleine, ist jedoch anstrengend und dauert manchmal länger. Sie benötigt Schwung, um sich zu bewegen, insbesondere wenn die Schmerzen stärker sind.
 
-### Modul 1 Mobilität:
-Aufgrund der Bandscheibenvorfälle und Schmerzen hat Muster Edeltraud Schwierigkeiten beim Bücken, Gehen und ist bereits mehrmals gestürzt. Sie benötigt Unterstützung beim Treppensteigen und ist auf eine Toilettensitzerhöhung angewiesen.
+**<Modul 2 kognitive und kommunikative Fähigkeiten>**  
+Frau Mustermann hat Schwierigkeiten, sich an Termine zu erinnern, insbesondere wenn sie diese nicht aufschreibt. Sie benötigt gelegentlich die Unterstützung ihrer Tochter, um bei behördlichen Angelegenheiten zurechtzukommen. In Gesprächen mit mehreren Personen hat sie Probleme, dem Inhalt zu folgen, was dazu führt, dass sie manchmal nachfragen muss oder das Gespräch nicht vollständig mitverfolgen kann. Sie hat jedoch noch nie Schwierigkeiten gehabt, sich im Freien zu orientieren.
 
-### Modul 2 kognitive und kommunikative Fähigkeiten:
-Die Versicherte zeigt Anzeichen von Vergesslichkeit, versteht nicht alles, erkennt die Familie, aber hat Schwierigkeiten, Namen zu erinnern. Sie liest keine Zeitung, hat kein Interesse daran und vergisst Termine. Ihr Mann organisiert den Haushalt und sie hat kein Interesse an sozialen Kontakten.
+**<Modul 3 Verhaltensweisen und psychische Problemlagen>**  
+Frau Mustermann gibt an, dass sie oft antriebslos ist, insbesondere bei schlechtem Wetter. Sie hat keine Angstzustände, schläft jedoch häufig schlecht, was sich in Schwierigkeiten beim Einschlafen oder nächtlichem Wachwerden äußert. Ihre Stimmung schwankt, und an schlechten Tagen fällt es ihr schwer, sich zu motivieren, alltägliche Aufgaben zu erledigen.
 
-### Modul 3 Verhaltensweisen und psychische Problemlagen:
-Muster Edeltraud hat keine Freude an Aktivitäten, ist oft traurig, hat Angst zu stürzen und leidet unter Schlafstörungen. Sie benötigt Hilfe beim nächtlichen Toilettengang. Zudem hat sie keine sozialen Interaktionen mehr, vergisst Termine und Behördengänge.
+**<Modul 4 Selbstversorgung>**  
+In der Körperpflege hat Frau Mustermann Schwierigkeiten, insbesondere beim Baden, da sie nicht mehr alleine in die Badewanne steigen kann. Das Duschen benötigt Hilfe, während sie sich am Waschbecken noch selbst waschen kann. Das Haarewaschen ist problematisch, da es schmerzhaft ist, den Kopf nach hinten zu neigen. Sie kann Zähne putzen und Gesicht waschen, benötigt jedoch Unterstützung beim Ankleiden, insbesondere beim Anziehen von Schuhen und Kleidungsstücken mit Knöpfen. Das Essen und Trinken kann sie selbstständig, hat jedoch manchmal Schwierigkeiten, ausreichend Flüssigkeit zu sich zu nehmen.
 
-### Modul 4 Selbstversorgung:
-Die Versicherte benötigt Unterstützung beim Waschen, Föhnen und Trocknen der Haare sowie beim Schließen von Knöpfen und Binden von Schuhen. Ihr Mann schneidet Fleisch für sie, während sie alleine auf die Toilette gehen kann. Sie vergisst jedoch oft zu trinken.
-
-### Modul 6 Gestaltung des Alltagslebens:
-Muster Edeltraud zeigt wenig Interesse an Alltagsaktivitäten, schaut hauptsächlich fern, ruft niemanden an und hat keine Lust, sich zu beschäftigen. Ihr Mann organisiert den Haushalt und sie hat keine Kontakte außerhalb des direkten Umfelds. Sie benötigt Unterstützung bei der Planung und Durchführung von Aktivitäten.
+**<Modul 6 Gestaltung des Alltagslebens>**  
+Frau Mustermann gestaltet ihren Alltag hauptsächlich durch Fernsehen und gelegentliches Lesen. Sie hat kaum noch Kontakt zu anderen Menschen außer ihrer Tochter, die sie regelmäßig besucht. Bei der Planung von Aktivitäten, wie dem Einkaufen von Geschenken für ihre Enkel, benötigt sie Unterstützung, da sie sich dabei überfordert fühlt. Sie hat das Bedürfnis nach regelmäßiger Hilfe im Haushalt und bei der Körperpflege, um ihre Selbstständigkeit zu fördern und sicherzustellen, dass sie ausreichend trinkt und sich nicht überanstrengt.
